@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+
+        <div class="profile" id="elementToCapture">
+            <div class="avatar" id="avatar">
+            </div>
+            <img class="bg-img" src="./assets/image/template_curriculum_vitae_graphic_design_page-0001.jpg" alt="">
+            <div class="content">
+                <div class="section">
+                    <div class="heading">
+                        <span class="heading-text">BORN</span>
+                        <span class="line"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <div class="text" contenteditable="true">text</div>
+                </div>
+                <div class="section">
+                    <div class="heading">
+                        <span class="heading-text">HOME TOWN</span>
+                        <span class="line"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <div class="text" contenteditable="true">text</div>
+                </div>
+                <div class="section">
+                    <div class="heading">
+                        <span class="heading-text">FAMOUS FOR</span>
+                        <span class="line"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <div class="text" contenteditable="true">text</div>
+                </div>
+                <div class="section">
+                    <div class="heading">
+                        <span class="heading-text">FACTS</span>
+                        <span class="line"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <div class="text" contenteditable="true">text</div>
+                </div>
+            </div>
+            <div class="info" contenteditable="true">text</div>
+            <div class="info2" contenteditable="true">text</div>
+
+        </div>
+        
+    </div>
+
+    <div class="action">
+        <input type="file" id="fileInput">
+
+    <button id="captureAndDownloadButton" >Capture</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const elementToCapture = document.getElementById('elementToCapture');
+    const captureAndDownloadButton = document.getElementById('captureAndDownloadButton');
+
+    captureAndDownloadButton.addEventListener('click', function () {
+        // Use html2canvas to capture the element
+        html2canvas(elementToCapture).then(function (canvas) {
+            // Convert the canvas to a data URL with best quality
+            const dataURL = canvas.toDataURL('image/png', 1.0);
+
+            // Create a temporary anchor element to trigger the download
+            const downloadLink = document.createElement('a');
+            downloadLink.href = dataURL;
+            downloadLink.download = 'captured_element.png';
+
+            // Trigger the download
+            downloadLink.click();
+        });
+    });
+    const fileInput = document.getElementById('fileInput');
+    const imageElement = document.getElementById('avatar');
+
+    fileInput.addEventListener('change', function () {
+        const selectedFile = fileInput.files[0];
+        console.log('a')
+
+        if (selectedFile) {
+            const imageUrl = URL.createObjectURL(selectedFile);
+            imageElement.style.backgroundImage = `url('${imageUrl}')`;
+        } else {
+            // Clear the image source if no file is selected
+            imageElement.src = '';
+        }
+    });
+});
+
+
+    </script>
+</body>
+</html>
